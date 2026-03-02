@@ -12,7 +12,7 @@
 
 <body>
   <header class="container">
-    <h1>BikeShare Data Dashboard</h1>
+    <h1>Climate Data Dashboard</h1>
     <p class="sub">
       Build charts from real-ish city data. Start with Bar + Line, then pick an extension chart.
     </p>
@@ -27,24 +27,26 @@
         <option value="bar" selected>Bar (compare neighborhoods)</option>
         <option value="line">Line (trend over time)</option>
         <option value="scatter">Scatter (relationship)</option>
-        <option value="doughnut">Doughnut (parts of whole)</option>
         <option value="radar">Radar (multi-metric compare)</option>
       </select>
 
       <label class="label">Month</label>
       <select id="monthSelect"></select>
 
-      <label class="label">Neighborhood</label>
-      <select id="hoodSelect"></select>
+      <label class="label">City</label>
+      <select id="citySelect">
+      </select>
 
       <label class="label">Metric</label>
       <select id="metricSelect">
-        <option value="trips" selected>Trips</option>
-        <option value="revenueUSD">Revenue (USD)</option>
-        <option value="avgDurationMin">Avg Duration (min)</option>
-        <option value="incidents">Incidents</option>
-        <option value="tempC">Temperature (C)</option>
+        <option value="avgTempC" selected>Average Temperature (C)</option>
+        <option value="minTempC">Minimum Temperature (C)</option>
+        <option value="maxTempC">Maximum Temperature (C)</option>
         <option value="precipMM">Precipitation (mm)</option>
+        <option value="humidityPct">Humidity (%)</option>
+        <option value="windKph">Wind Speed (kph)</option>
+        <option value="airQualityIndex">Air Quality Index</option>
+        <option value="sunshineHours">Sunshine Hours</option>
       </select>
 
       <button id="renderBtn">Render Chart</button>
