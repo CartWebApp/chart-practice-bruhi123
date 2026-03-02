@@ -44,7 +44,7 @@ renderBtn.addEventListener("click", () => {
 // --- Students: you’ll edit / extend these functions ---
 function buildConfig(type, { month, city, metric }) {
   if (type === "bar") return barByCity(month, metric);
-  if (type === "line") return lineOverTime(city, ["trips", "revenueUSD"]);
+  if (type === "line") return lineOverTime(city, ["Phoenix", "Seattle"]);
   if (type === "scatter") return scatterTripsVsTemp(city);
   if (type === "radar") return radarCompareCity(month);
   return barByCity(month, metric);
