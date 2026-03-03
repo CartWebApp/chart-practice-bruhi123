@@ -44,7 +44,7 @@ renderBtn.addEventListener("click", () => {
 // --- Students: you’ll edit / extend these functions ---
 function buildConfig(type, { month, city, metric }) {
   if (type === "bar") return barByCity(month, metric);
-  if (type === "line") return lineOverTime(city, ["Phoenix", "Seattle"]);
+  if (type === "line") return lineOverTime(city, ["minTempC", "maxTempC"]);
   if (type === "scatter") return scatterTripsVsTemp(city);
   if (type === "radar") return radarCompareCity(month);
   return barByCity(month, metric);
@@ -79,7 +79,7 @@ function barByCity(month, metric) {
   };
 }
 
-// Task B: LINE — trend over time for one city (2 datasets)
+// Task B: LINE — Temperature over months for one city (2 datasets)
 function lineOverTime(city, metrics) {
   const rows = chartData.filter(r => r.city === city);
 
@@ -95,37 +95,37 @@ function lineOverTime(city, metrics) {
     options: {
       responsive: true,
       plugins: {
-        title: { display: true, text: `Trends over time: ${city}` }
+        title: { display: true, text: `Temperature over months: ${city}` }
       },
       scales: {
-        y: { title: { display: true, text: "Value" } },
+        y: { title: { display: true, text: "Temperature (C)" } },
         x: { title: { display: true, text: "Month" } }
       }
     }
   };
 }
 
-// SCATTER — relationship between temperature and trips
+// SCATTER — humidity vs avgTempC temperature for one city
 function scatterTripsVsTemp(city) {
   const rows = chartData.filter(r => r.city === city);
 
-  const points = rows.map(r => ({ x: r.tempC, y: r.trips }));
+  const points = rows.map(r => ({ x: r.humidityPct, y: r.avgTempC }));
 
   return {
     type: "scatter",
     data: {
       datasets: [{
-        label: `Trips vs Temp (${city})`,
+        label: `Humidity vs Avg Temp (${city})`,
         data: points
       }]
     },
     options: {
       plugins: {
-        title: { display: true, text: `Does temperature affect trips? (${city})` }
+        title: { display: true, text: `Does humidity affect "feels like" temperature? (${city})` }
       },
       scales: {
-        x: { title: { display: true, text: "Temperature (C)" } },
-        y: { title: { display: true, text: "Phoenix" } }
+        x: { title: { display: true, text: "Humidity (%)" } },
+        y: { title: { display: true, text: "Avg Temp (C)" } }
       }
     }
   };
@@ -135,7 +135,7 @@ function scatterTripsVsTemp(city) {
 function radarCompareCity(month) {
   const rows = chartData.filter(r => r.month === month);
 
-  const metrics = ["trips", "revenueUSD", "avgDurationMin", "incidents"];
+  const metrics = ["precipMM", "humidityPct", "windKph", "airQualityIndex", "sunshineHours"];
   const labels = metrics;
 
   const datasets = rows.map(r => ({
